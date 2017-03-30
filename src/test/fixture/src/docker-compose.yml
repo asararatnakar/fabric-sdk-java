@@ -2,8 +2,16 @@ version: '2.0'
 
 services:
 
+  ccenv:
+    image: hyperledger/fabric-ccenv:x86_64-1.0.0-alpha
+    container_name: ccenv
+
+  javaenv:
+    image: hyperledger/fabric-javaenv:x86_64-1.0.0-alpha
+    container_name: javaenv
+
   ca:
-    image: hyperledger/fabric-ca
+    image: hyperledger/fabric-ca:x86_64-1.0.0-alpha
     ports:
       - "7054:7054"
     command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
@@ -11,7 +19,7 @@ services:
     container_name: ca
 
   orderer:
-    image: hyperledger/fabric-orderer
+    image: hyperledger/fabric-orderer:x86_64-1.0.0-alpha
     environment:
       - ORDERER_GENERAL_LOGLEVEL=debug
       - ORDERER_GENERAL_LEDGERTYPE=ram
@@ -27,7 +35,7 @@ services:
       - 7050:7050
 
   vp0:
-    image: hyperledger/fabric-peer
+    image: hyperledger/fabric-peer:x86_64-1.0.0-alpha
     environment:
       - CORE_PEER_ADDRESSAUTODETECT=true
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
@@ -50,7 +58,7 @@ services:
       - orderer
 
   vp1:
-    image: hyperledger/fabric-peer
+    image: hyperledger/fabric-peer:x86_64-1.0.0-alpha
     environment:
       - CORE_PEER_ADDRESSAUTODETECT=true
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock

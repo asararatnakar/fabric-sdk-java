@@ -1,3 +1,48 @@
+## Java SDK against alpha images
+
+
+#### Clone Java SDK repo
+
+```
+cd $GOPATH/src/github.com/hyperledger/
+
+git clone https://github.com/hyperledger/fabric-sdk-java.git
+```
+
+cd fabric-sdk-java
+
+```
+#### With Alpha images , JAVA SDK compatible version
+git reset --hard 38516f0
+```
+
+#### change the docker-compose file to point to alpha images, refer the file [here](https://github.com/asararatnakar/fabric-sdk-java/tree/master/src/test/fixture/src/docker-compose.yml)
+
+$GOPATH/src/github.com/hyperledger/fabric/fabric-sdk-java/src/test/fixture/src/docker-compose.yml
+
+```
+cd $GOPATH/src/github.com/hyperledger/fabric/fabric-sdk-java/src/test/fixture/src/
+
+docker-compose up -d
+
+```
+
+#### Install dependencies
+
+```
+mvn install -DskipTests 
+```
+
+
+#### Execute End-2-End Unit tests
+```
+##Execute end 2 end Integration test
+mvn failsafe:integration-test -DskipITs=false
+```
+
+--------------------------------------------------------------------------------------------------------------------
+
+
 # Java SDK for Hyperledger Fabric 1.0
 Welcome to Java SDK for Hyperledger project. The SDK helps facilitate Java applications to manage the lifecycle of
  Hyperledger channels  (*often referred to as chains*) and user chaincode. The SDK also provides a means to execute
